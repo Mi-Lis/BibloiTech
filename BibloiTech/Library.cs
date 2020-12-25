@@ -8,24 +8,42 @@ namespace BibloiTech
     partial class Program
     {
 
-        public class DataBook
+        public class Data
         {
             // readonly JsonSerializer serializer = new JsonSerializer(); //Создание объекта необходимого для сериализации информации об объекте
 
             readonly string Path; //Расположение JSON файла
             string json; //Содержание JSON документа
             readonly List<Book> books = new List<Book>();
+            readonly List<Author> authors = new List<Author>();
+            readonly List<Publ> publs = new List<Publ>();
             readonly StreamWriter file; //Файл с которым будем работать
-            public DataBook(string path)
+            public Data(string path)
             {
                 Path = path;
                 file = File.CreateText(Path);
                 file.Close();
             }
-            public void Write()//Запись в файл
+            public void Write(string key)//Запись в файл
             {
-                json = JsonConvert.SerializeObject(books, Formatting.Indented);
-                File.WriteAllText(Path, json);
+                switch (key)
+                {
+                    case "b":
+                        {
+                            json = JsonConvert.SerializeObject(books, Formatting.Indented);
+                            File.WriteAllText(Path, json);
+                        }
+                    case "a":
+                        {
+                            json = JsonConvert.SerializeObject(authors, Formatting.Indented);
+                            File.WriteAllText(Path, json);
+                        }
+                    case "p":
+                        {
+                            json = JsonConvert.SerializeObject(publs, Formatting.Indented);
+                            File.WriteAllText(Path, json);
+                        }
+                }
             }
             public string Read()//Чтение JSON документа
             {
@@ -59,7 +77,7 @@ namespace BibloiTech
             //  readonly JsonSerializer serializer = new JsonSerializer();
             readonly string Path;
             string json;
-            readonly List<Author> authors = new List<Author>();
+            
             readonly StreamWriter file;
             public DataAuthors(string path)
             {
@@ -105,7 +123,7 @@ namespace BibloiTech
 
             readonly string Path;
             string json;
-            readonly List<Publ> publs = new List<Publ>();
+           
             readonly StreamWriter file;
             public DataPubls(string path)
             {

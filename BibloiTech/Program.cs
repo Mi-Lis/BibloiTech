@@ -24,7 +24,7 @@ namespace BibloiTech
             
             string json = JsonConvert.SerializeObject(authors, Formatting.Indented); //Оформление JSON файла и заполнение информацией об авторах
             Console.WriteLine(json);
-            DataBook data = new DataBook("F:/books.json");
+            Data data = new Data("F:/books.json");
             data.Add(book);
 
           DataAuthors dataAuthors = new DataAuthors("F:/authors.json");
